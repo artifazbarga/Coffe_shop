@@ -1,0 +1,49 @@
+{% extends "BASE.html" %}
+{% block main %}
+
+    <table id="customers">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>description</th>
+        <th>image-url</th>
+        <th>Kind 1-ice,2-hot,3-juice</th>
+        <th>Delete</th>
+      </tr>
+     {% for i in tables %}
+          <tr>
+            <td id="id">{{i.id}} </td>
+            <td id="name">{{i.name}} </td>
+            <td id="price">{{i.price}}</td>
+            <td id="des">{{i.des}}</td>
+            <td id="image">{{i.image}}</td>
+            <td id="kind">{{i.kind}}</td>
+              <td><input type="button" onclick="Delete(this)" value="Delete"></input></td>
+          </tr>
+      {% endfor %}
+    </table>
+ <p id="info"></p>
+<a href="{{url_for('homePAge')}}">back to homepage</a>
+<script>
+function Delete(element) {
+
+     id =element.parentNode.parentNode.cells[0].textContent
+    var Parent = document.getElementById('customers');
+    while(Parent.hasChildNodes())
+    {
+       Parent.removeChild(Parent.firstChild);
+    }
+    window.location ='http://127.0.0.1:5000/delete_product/' + id;
+
+}
+
+
+
+
+</script>
+
+
+{% endblock %}
+
+

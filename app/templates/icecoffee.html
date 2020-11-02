@@ -5,9 +5,19 @@
           <div class="tm-black-bg tm-list-item-text">
             <h3 class="tm-list-item-name">{{item.name}}<span class="tm-list-item-price">${{item.price}}</span></h3>
             <p class="tm-list-item-description">{{item.des}}</p>
-            <div class="left_button"><button class="favorite styled" type="button">Add to cart</button></div>
+            <div class="left_button"><button onclick="cart(this)" class="favorite styled" type="button" id="add">Add to cart</button></div>
 
           </div>
         </div>
     {% endfor %}
+<script>
+
+    function cart(element) {
+        window.location ='http://127.0.0.1:5000/login';
+
+
+
+}
+
+</script>
 {% endblock %}

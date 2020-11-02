@@ -17,7 +17,8 @@ def login():
         if user:
             session['admin'] = Form.PhoneNumber.data
             return flask.redirect(url_for('homePAge'))
-
+    # if session['admin'] != None:
+    #     return flask.redirect(url_for('Profile'))
     return flask.render_template('login.html',form=Form )
 
 
@@ -49,3 +50,7 @@ def logout():
     flask_login.logout_user()
     flask.session['admin'] =''
     return flask.redirect('/')
+
+@app.route('/Profile/<phone>')
+def Profile(phone):
+    pass

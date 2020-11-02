@@ -1,9 +1,9 @@
 from . import db
-import flask_login
+from .utils import ModelMixin
 
-class Products(db.Model, flask_login.UserMixin):
+class Products(db.Model,ModelMixin):
     __tablename__ = 'products'
-    id = db.Column(db.INTEGER(),primary_key=True)
+    # id = db.Column(db.INTEGER(),primary_key=True)
     name = db.Column(db.String(64) ,nullable=False)
     price = db.Column(db.INTEGER() ,nullable=False)
     des = db.Column(db.String(255))
@@ -20,4 +20,6 @@ class Products(db.Model, flask_login.UserMixin):
 
 
 
+    def __repr__(self):
+        return f"<User {self.id}.{self.name}"
 

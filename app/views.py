@@ -6,6 +6,7 @@ from app.special import Special
 from app.edit import Edit
 from app.models import User
 import flask_login
+import json
 
 
 @app.route("/", methods=['GET','POST'])
@@ -38,8 +39,9 @@ def add_product():
         if Form.name.data != None and Form.price.data != None and Form.image.data != None:
             product = Products(Form.name.data, Form.price.data, Form.des.data, Form.image.data ,Form.kind.data)
             try:
-                db.session.add(product)
-                db.session.commit()
+                product.save()
+                # db.session.add(product)
+                # db.session.commit()
             except Exception as e:
                 print(str(e.args)[120:][:-5])
                 return flask.render_template("addproduct.html", form=Form, e=str(e.args)[120:][:-5])
@@ -102,3 +104,50 @@ def profile_page(username):
     if not usr:
         return "refaa"
     return "Hello refaa"
+
+@flask_login.login_required
+@app.route("/show" , methods=['GET','POST'])
+def show():
+    tables = Products.query.all()
+    return flask.render_template("ajax.html", tables=tables, name ="refaa")
+
+@flask_login.login_required
+@app.route("/Deleteproduct" , methods=['GET','POST'])
+def Deleteproduct():
+    tables = Products.query.all()
+    return flask.render_template("delete_update.html", tables=tables)
+
+
+@app.route("/delete_product/<idp>", methods=['GET','POST'])
+def delete_product(idp):
+    p = Products.query.filter_by(id= idp).first_or_404()
+    print(p)
+    if p:
+        try:
+            p.delete()
+        except Exception as e:
+            return flask.render_template("delete_update.html")
+        except:
+            return flask.render_template("delete_update.html")
+        return flask.redirect(url_for('Deleteproduct'))
+    return flask.redirect(url_for('Deleteproduct'))
+
+@app.route("/edit_product/<id>/<name>/<price>/<des>/<image>/<kind>", methods=['GET'])
+def edit_product(id,name,price,des,image,kind):
+    image= image.replace("-","/")+".png"
+    if len(name) > 0:
+        pr = Products.query.filter_by(id= id).first_or_404()
+        p = Products(name,price, des, image ,kind)
+        if p:
+            try:
+                pr.delete()
+                p.update()
+            except Exception as e:
+                return flask.render_template("delete_update.html")
+            except:
+                return flask.render_template("delete_update.html")
+            return flask.redirect(url_for('show'))
+    return flask.render_template("ajax.html",data="refaa")
+
+
+

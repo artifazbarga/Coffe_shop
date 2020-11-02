@@ -29,6 +29,7 @@ def shell_ctx():
         "app":app,
         "db": db
     }
+
 @login_mng.user_loader
 def user_loader(user_id):
     return models.User.query.get(user_id)
