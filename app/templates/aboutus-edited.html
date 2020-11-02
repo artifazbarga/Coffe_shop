@@ -1,0 +1,23 @@
+{% block hot %}
+    {% for item in about %}
+       <div class="tm-black-bg tm-mb-20 tm-about-box-1">
+                  <h2 class="tm-text-primary tm-about-header">About Wave Cafe</h2>
+                  <div class="tm-list-item tm-list-item-2">
+                    <img src="static/img/about-1.png" alt="Image" class="tm-list-item-img tm-list-item-img-big">
+                    <div class="tm-list-item-text-2">
+                      <p>{{item.des}}</p>
+                    </div>
+                  </div>
+                </div>
+        <div class="tm-black-bg tm-mb-20 tm-about-box-2">
+                  <div class="tm-list-item tm-list-item-2">
+                    <div class="tm-list-item-text-2">
+                      <h2 class="tm-text-primary">How we began</h2>
+                      <p>{{item.des2}}</p>
+                    </div>
+                    <img src="static/img/about-2.png" alt="Image" class="tm-list-item-img tm-list-item-img-big tm-img-right">
+                  </div>
+                  <p>{{item.des3}}</p>
+                </div>
+{% endfor %}
+{% endblock %}

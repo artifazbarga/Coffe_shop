@@ -1,0 +1,79 @@
+{% extends "BASE.html" %}
+
+{% block main %}
+  <div class="bg-img">
+      <div class="content">
+          <header>Login Form</header>
+                    {% if e != null %}
+                    <div style="text-align: left; color: #a50909;margin-bottom: 10px;"><small>{{e}}</small></div>
+                  {% endif %}
+            <form action="" novalidate method="post">
+
+                <div class="field" required placeholder="Email or Phone">
+                    <span class="fa fa-archive" ></span>
+                    {{form.name(class= "form-control")}}
+<!--                    {{form.name()}}-->
+
+                </div >
+                <div class="validate">
+                          {% for error in form.name.errors %}
+                            <small>{{error}}</small>
+                          {% endfor %}
+                </div>
+               <div class="field space">
+                     <span class="fa fa-money" aria-hidden="true"></span>
+<!--                    {{form.price.label}}-->
+                    {{form.price()}}
+
+                </div>
+                <div class="validate">
+                     {% for error in form.price.errors %}
+                    <small>{{error}}</small>
+                   {% endfor %}
+                </div>
+               <div class="field space">
+                    <span class="fa fa-file-text" aria-hidden="true"></span>
+                        {{form.des()}}
+
+                </div>
+                  <div class="validate">
+                      {% for error in form.des.errors %}
+                            <small>{{error}}</small>
+                         {% endfor %}
+                </div>
+                <div class="field space">
+                    <span class="fa fa-image" aria-hidden="true"></span>
+                        {{form.image()}}
+
+                </div>
+                <div class="validate">
+                     {% for error in form.image.errors %}
+                            <small>{{error}}</small>
+                         {% endfor %}
+                </div>
+                    <div class="field space">
+                    <span class="fa fa-file" aria-hidden="true"></span>
+                        {{form.kind()}}
+
+                </div>
+                <div class="validate">
+                     {% for error in form.kind.errors %}
+                            <small>{{error}}</small>
+                         {% endfor %}
+                </div>
+                <div class="field space">
+                     {{form.Sumbmit()}}
+                </div>
+            </form>
+                <div class="links space">
+                  <div class="facebook">
+                    <i class="fab fa-facebook-f"><span>Facebook</span></i>
+                  </div>
+                <div class="instagram">
+                            <i class="fab fa-instagram"><span>Instagram</span></i>
+                          </div>
+                </div>
+      </div>
+  </div>
+
+{% endblock %}

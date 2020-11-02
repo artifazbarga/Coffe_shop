@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WAV COFFEE</title>
+    <link rel="stylesheet" href="static/css/logincss.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Cafe HTML Template by Tooplate</title>
+    <link rel="stylesheet" href="static/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="static/css/tooplate-wave-cafe.css">
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Cafe HTML Template by Tooplate</title>
+    <link rel="stylesheet" href="static/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="static/css/tooplate-wave-cafe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    {% block main %}
+    {% endblock %}
+
+
+  <div class="tm-video-wrapper">
+      <i id="tm-video-control-button" class="fas fa-pause"></i>
+      <video autoplay muted loop id="tm-video">
+          <source src="static/video/wave-cafe-video-bg.mp4" type="video/mp4">
+      </video>
+  </div>
+<script src="static/js/jquery-3.4.1.min.js"></script>
+<script>
+     btn.on("click", function(e) {
+        const video = document.getElementById("tm-video");
+        $(this).removeClass();
+
+        if (video.paused) {
+          video.play();
+          $(this).addClass("fas fa-pause");
+        } else {
+          video.pause();
+          $(this).addClass("fas fa-play");
+        }
+      });
+</script>
+</body>
+</html>
