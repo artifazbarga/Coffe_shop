@@ -1,13 +1,13 @@
 from . import db
 import flask_login
-class User(db.Model, flask_login.UserMixin):
+from .utils import ModelMixin
+class User(db.Model,ModelMixin ,flask_login.UserMixin ):
     __tablename__ = 'users'
-    id = db.Column(db.INTEGER(),primary_key=True)
+    # id = db.Column(db.INTEGER(),primary_key=True)
     name = db.Column(db.String(64) ,nullable=False)
     password = db.Column(db.String(64) ,nullable=False)
     phonenumber = db.Column(db.INTEGER() ,unique=True)
     email = db.Column(db.String(255))
-
 
     def __init__(self, name, password , phonenumber , email):
         self.name = name.title()
@@ -23,8 +23,18 @@ class User(db.Model, flask_login.UserMixin):
     def check_password(self, password):
         return password
 
-    def get_phonenumber(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
-        return self.phonenumber
+
+    @classmethod
+    def login_user(cls ,phonenumber, password):
+        user_l = cls.query.filter_by(phonenumber = phonenumber).first()
+        if user_l and user_l.check_password(password):
+            flask_login.login_user(user_l)
+            return user_l
+        return False
+
+
+
+    def __repr__(self):
+        return f"<User {self.id}.{self.name}"
 
 

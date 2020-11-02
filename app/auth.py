@@ -12,10 +12,10 @@ def login():
     if request.method == 'POST':
         #check username and password is th same true? login
         number = 546147282
-        user = User.query.filter_by(phonenumber = Form.PhoneNumber.data , password = Form.password.data).first()
+        user = User.login_user(Form.PhoneNumber.data,Form.password.data)
+        # user = User.query.filter_by(phonenumber = Form.PhoneNumber.data , password = Form.password.data).first()
         if user:
             session['admin'] = Form.PhoneNumber.data
-            flask_login.login_user(user)
             return flask.redirect(url_for('homePAge'))
 
     return flask.render_template('login.html',form=Form )
@@ -28,11 +28,12 @@ def signup():
     db.session.commit()
     Form.validate()
     if flask.request.method == "POST":
-        if Form.username.data != None and Form.password.data != None and Form.phonenumber.data != None:
-            user = User(Form.username.data,Form.password.data,Form.phonenumber.data,Form.email.data)
+        if Form.username.data != None and Form.password.data != None and Form.PhoneNumber.data != None:
+            user = User(Form.username.data,Form.password.data,Form.PhoneNumber.data,Form.email.data)
             try :
-                db.session.add(user)
-                db.session.commit()
+                user.save()
+                # db.session.add(user)
+                # db.session.commit()
             except Exception as e:
                 print(str(e.args)[120:][:-5])
                 return flask.render_template("signup.html", form=Form, e =str(e.args)[120:][:-5])

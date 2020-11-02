@@ -4,6 +4,8 @@ from app import form ,productsform ,foraboutus
 from app.products import Products
 from app.special import Special
 from app.edit import Edit
+from app.models import User
+import flask_login
 
 
 @app.route("/", methods=['GET','POST'])
@@ -91,3 +93,12 @@ def Editaboutus():
                 return flask.render_template("Edit-about.html", form=Form, e=sys.exc_info()[0])
             return flask.redirect('/')
     return flask.render_template("Edit-about.html", form=Form)
+
+
+@flask_login.login_required
+@app.route("/profile/<username>", methods=['GET','POST'])
+def profile_page(username):
+    usr = User.query.filter_by(name= username).first_or_404()
+    if not usr:
+        return "refaa"
+    return "Hello refaa"

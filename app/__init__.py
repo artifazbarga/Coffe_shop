@@ -20,6 +20,15 @@ login_mng.init_app(app)
 
 from app import models , views ,auth ,products ,special,edit
 
+
+@app.shell_context_processor
+def shell_ctx():
+    return {
+        "models":models,
+        "User": models.User,
+        "app":app,
+        "db": db
+    }
 @login_mng.user_loader
 def user_loader(user_id):
     return models.User.query.get(user_id)
