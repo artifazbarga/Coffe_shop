@@ -31,8 +31,9 @@ class User(db.Model,ModelMixin ,flask_login.UserMixin ):
             flask_login.login_user(user_l)
             return user_l
         return False
-
-
+    @classmethod
+    def get_phone(cls):
+        return cls.phonenumber
 
     def __repr__(self):
         return f"<User {self.id}.{self.name}"

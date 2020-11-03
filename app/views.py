@@ -6,6 +6,7 @@ from app.special import Special
 from app.edit import Edit
 from app.models import User
 import flask_login
+from app.addcart import Addcart
 import json
 
 
@@ -149,5 +150,38 @@ def edit_product(id,name,price,des,image,kind):
             return flask.redirect(url_for('show'))
     return flask.render_template("ajax.html",data="refaa")
 
+@flask_login.login_required
+@app.route('/addcart/<name>/<price>/<des>/<image>/<kind>')
+def addcart(name,price,des,image,kind):
+    if login_mng.anonymous_user.is_active:
+        user = flask_login.login_manager.session['admin']
+    image = image.replace('-','/')
+    price = price[1:]
+    print(price)
+    user =int(user)
+    print(type(user))
+    add_cart = Addcart(name=name,price=price,des=des,image=image,kind=kind,phone=user)
+    if add_cart:
+        try:
+            add_cart.save()
+        except Exception as e:
+            return flask.redirect(url_for('homePAge'))
+        except:
+            return flask.redirect(url_for('homePAge'))
+    return flask.redirect(url_for('showcart'))
+    prdoducts ={"name":"rfaa" , "price":22 ,"image":"Sf" , "des":"sfsaf"}
+    return flask.render_template("add_to_cart.html",prdoducts=prdoducts )
 
 
+@app.route('/Profile/<phone>')
+def Profile(phone):
+    pass
+
+@flask_login.login_required
+@app.route('/showcart')
+def showcart():
+    if login_mng.anonymous_user.is_active:
+        user = flask_login.login_manager.session['admin']
+    products =Addcart.query.filter(Addcart.phone == user )
+    print(products)
+    return flask.render_template("add_to_cart.html", prdoducts=products)

@@ -139,5 +139,27 @@
       });
     });
 
-  </script>
+
+
+function Addtocart(element) {
+       var x = document.getElementById("all").querySelectorAll(".aa");
+            // console.log(x)
+            // x[0].getAttribute('src');
+            // console.log(x[0].getAttribute('src'))
+        var name= x[1].innerHTML;
+        console.log(name);
+        var price= x[2].innerHTML;
+        price =price.substring(1);
+        console.log(price);
+        var des= x[3].innerHTML
+        console.log(des);
+        var image= x[0].getAttribute('src')
+        image =  image.replace("/","-");
+        image =  image.replace("/","-");
+        console.log(image);
+        var kind =1
+        window.location ='http://127.0.0.1:5000/addcart/'+name+"/"+price+"/"+des+"/"+image+"/"+kind;
+
+}
+</script>
 {% endblock %}

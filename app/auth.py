@@ -51,6 +51,3 @@ def logout():
     flask.session['admin'] =''
     return flask.redirect('/')
 
-@app.route('/Profile/<phone>')
-def Profile(phone):
-    pass

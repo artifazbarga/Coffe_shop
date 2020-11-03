@@ -18,7 +18,7 @@ db.init_app(app)
 migrate.init_app(app,db)
 login_mng.init_app(app)
 
-from app import models , views ,auth ,products ,special,edit
+from app import models , views ,auth ,products ,special,edit,addcart
 
 
 @app.shell_context_processor
